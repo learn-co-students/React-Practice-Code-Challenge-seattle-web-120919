@@ -1,20 +1,19 @@
 import React, { Fragment } from 'react'
 
-const Sushi = (props) => {
+const Sushi = ({name, img_url, id, price, eatSushi, eaten}) => {
+  // const eatSushi = () => {}  // in onClick below
   return (
     <div className="sushi">
       <div className="plate" 
-           onClick={/* Give me a callback! */ null}>
+          onClick={()=> eatSushi(id)}> 
+          {/* use arrowFn when passing in parameters, 
+          else invokes eatSushi*/}
         { 
-          /* Tell me if this sushi has been eaten! */ 
-          false ?
-            null
-          :
-            <img src={/* Give me an image source! */ } width="100%" />
+        eaten ? null : <img src={img_url} width="100%" />
         }
       </div>
       <h4 className="sushi-details">
-        {/* Give me a name! */} - ${/* Give me a price! */}
+        {name} - ${price}
       </h4>
     </div>
   )
