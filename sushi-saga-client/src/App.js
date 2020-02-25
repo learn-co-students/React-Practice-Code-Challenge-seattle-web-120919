@@ -11,13 +11,23 @@ class App extends Component {
     sushiList: [],
     currentSushi: [],
     money: 200,
-    eaten: []
+    eaten: [],
+    sushiListIndex: 0
+  }
+
+  indexCheck = () => {
+    if(this.state.sushiListIndex >= 100){
+      return 0
+    } else {
+      return this.state.sushiListIndex + 4
+    }
   }
 
   fourSushi = () => {
     this.setState({
       ...this.state,
-      currentSushi: this.state.sushiList.splice(0, 4)
+      currentSushi: this.state.sushiList.slice(this.state.sushiListIndex, this.state.sushiListIndex + 4),
+      sushiListIndex: this.indexCheck()
     })
   }
 
@@ -42,6 +52,14 @@ class App extends Component {
     })
   }
 
+  addMoney = (event) => {
+    event.preventDefault()
+    this.setState({
+      ...this.state,
+      money: this.state.money + parseInt(event.target.amount.value, 10)
+    })
+  }
+
   isSushiEaten = (sushi) => {
     if(this.state.eaten.includes(sushi)){
       return true
@@ -49,7 +67,7 @@ class App extends Component {
     return false
   }
 
-  shouldComponentUpdate(nextProps, nextState){
+  shouldComponentUpdate(nextState){
     if(nextState.money < 0) {
       console.log("Broke boys")
       return false
@@ -69,10 +87,11 @@ class App extends Component {
 
 
   render() {
+    console.log(this.state.sushiListIndex)
     return (
       <div className="app">
         <SushiContainer currentSushi={this.state.currentSushi} fourSushi={this.fourSushi} eatSushi={this.eatSushi} isSushiEaten={this.isSushiEaten}/>
-        <Table money={this.state.money} eaten={this.state.eaten}/>
+        <Table money={this.state.money} eaten={this.state.eaten} addMoney={this.addMoney}/>
       </div>
     );
   }
