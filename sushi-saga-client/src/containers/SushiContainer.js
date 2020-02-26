@@ -3,7 +3,8 @@ import MoreButton from '../components/MoreButton'
 import Sushi from '../components/Sushi'
 
 const SushiContainer = ({fourSushis, nextSushi, eatSushi, eatenSushis}) => {
-
+  console.log({fourSushis, nextSushi, eatSushi, eatenSushis})
+  
   const renderSushis = () => {
     return fourSushis.map(sushi => {
       return <Sushi name={sushi.name}

@@ -55,10 +55,10 @@ class App extends Component {
     return (
       <div className="app">
         <SushiContainer 
-          fourSushis={this.renderSushi()}
-          nextSushi={this.nextSushi}
-          eatSushi={this.eatSushi}
-          eatenSushis={this.state.eatenSushis}/>
+          fourSushis={this.renderSushi()} // 4 sushi rendered then passed to child
+          nextSushi={this.nextSushi} // pass down function
+          eatSushi={this.eatSushi} // pass id, price to grandchild function
+          eatenSushis={this.state.eatenSushis}/> x
         <Table 
           eatenSushis={this.state.eatenSushis}
           balance={this.state.balance}/>
